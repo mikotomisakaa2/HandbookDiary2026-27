@@ -72,6 +72,7 @@ export default function App() {
   const [activeModal, setActiveModal] = useState<ModalKind>(null);
   const [selectedPageId, setSelectedPageId] = useState<string>('2026-11-p1');
   const [pageTurnAnim, setPageTurnAnim] = useState<'none' | 'next' | 'prev'>('none');
+  const [isClosingBook, setIsClosingBook] = useState(false);
   const [isHighlightMode, setIsHighlightMode] = useState(false);
   const [highlighterColor, setHighlighterColor] = useState(HIGHLIGHTER_COLORS[0].hex);
 
@@ -119,6 +120,15 @@ export default function App() {
   const triggerTurn = (dir: 'next' | 'prev') => {
     setPageTurnAnim(dir);
     window.setTimeout(() => setPageTurnAnim('none'), 340);
+  };
+
+  const handleCloseBook = () => {
+    if (isClosingBook) return;
+    setIsClosingBook(true);
+    window.setTimeout(() => {
+      setState((prev) => ({ ...prev, isBookOpen: false }));
+      setIsClosingBook(false);
+    }, 360);
   };
 
   const updateCurrentMonth = (patch: Partial<MonthData>) => {
@@ -386,14 +396,16 @@ export default function App() {
             <div className="desk-toolbar-left">
               <button
                 type="button"
-                className="wood-chip-btn"
-                onClick={() =>
-                  setState((prev) => ({ ...prev, isBookOpen: false }))
-                }
-                title="Close Diary Cover"
+                className="close-book-btn"
+                onClick={handleCloseBook}
+                title="Close book and return to front cover"
               >
-                <BookOpen size={15} /> {state.diaryTitle?.trim() || 'Cover'}
+                <BookOpen size={15} /> Close Book
               </button>
+
+              <span className="diary-title-chip" title="Journal Name">
+                {state.diaryTitle?.trim() || 'Handbook Diary'}
+              </span>
 
               <select
                 className="month-picker-select"
@@ -575,7 +587,7 @@ export default function App() {
             <div
               className={`open-book-frame ${
                 pageTurnAnim !== 'none' ? `turn-${pageTurnAnim}` : ''
-              }`}
+              } ${isClosingBook ? 'is-closing-book' : ''}`}
             >
               <div
                 className="open-book-ribbon"

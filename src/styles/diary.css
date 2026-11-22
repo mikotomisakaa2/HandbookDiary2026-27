@@ -455,6 +455,35 @@ body,
   border-color: rgba(235, 192, 122, 0.42);
 }
 
+.close-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 9px;
+  border: 1.5px solid #e7c27c;
+  background: linear-gradient(135deg, #d7a855, #b47c32);
+  color: #241309;
+  font-family: var(--pen-font);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.close-book-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.diary-title-chip {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fbe6be;
+  padding: 0 6px;
+}
+
 .month-picker-select,
 .font-picker-select {
   padding: 4px 10px;
@@ -640,6 +669,12 @@ body,
 
 .open-book-frame {
   animation: bookOpenReveal 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.open-book-frame.is-closing-book {
+  opacity: 0;
+  transform: perspective(1600px) rotateY(14deg) scale(0.92);
+  transition: transform 0.34s ease, opacity 0.32s ease;
 }
 
 /* =========================================================
