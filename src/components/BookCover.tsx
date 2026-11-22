@@ -2,20 +2,24 @@ import React, { useState } from 'react';
 import { IndianSeasonTheme } from '../data/seasons';
 
 interface BookCoverProps {
+  diaryTitle: string;
   ownerName: string;
   season: IndianSeasonTheme;
   activeMonthLabel: string;
   startDayLabel: string;
+  onChangeDiaryTitle: (title: string) => void;
   onChangeOwnerName: (name: string) => void;
   onOpenBook: () => void;
   onLoadDemo: () => void;
 }
 
 export const BookCover: React.FC<BookCoverProps> = ({
+  diaryTitle,
   ownerName,
   season,
   activeMonthLabel,
   startDayLabel,
+  onChangeDiaryTitle,
   onChangeOwnerName,
   onOpenBook,
   onLoadDemo,
@@ -86,18 +90,33 @@ export const BookCover: React.FC<BookCoverProps> = ({
               </span>
             </div>
 
-            <h1 className="cover-title">Handbook Diary</h1>
+            <label className="cover-field-label" htmlFor="cover-journal-title">
+              Name your journal ✎
+            </label>
+            <input
+              id="cover-journal-title"
+              type="text"
+              className="cover-title-input"
+              value={diaryTitle}
+              onChange={(e) => onChangeDiaryTitle(e.target.value)}
+              aria-label="Handbook Journal Name"
+              placeholder="Handbook Diary"
+            />
             <div className="cover-years">2026 — 2027</div>
 
             <div className="cover-divider" />
 
+            <label className="cover-field-label" htmlFor="cover-owner-name">
+              This handbook belongs to
+            </label>
             <input
+              id="cover-owner-name"
               type="text"
               className="cover-owner-input"
               value={ownerName}
               onChange={(e) => onChangeOwnerName(e.target.value)}
               aria-label="Diary Owner Name"
-              placeholder="Write your name..."
+              placeholder="Write your name here..."
             />
 
             <p className="cover-quote">

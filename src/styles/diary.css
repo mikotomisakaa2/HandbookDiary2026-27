@@ -269,13 +269,42 @@ body,
   margin-bottom: 14px;
 }
 
-.cover-title {
+.cover-field-label {
+  display: block;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  color: rgba(246, 218, 170, 0.78);
+  margin-bottom: 2px;
+}
+
+.cover-title,
+.cover-title-input {
+  width: 100%;
   margin: 0;
-  font-size: 46px;
-  line-height: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px dashed rgba(247, 226, 188, 0.32);
+  font-family: var(--pen-font);
+  font-size: 42px;
+  line-height: 1.05;
   font-weight: 700;
+  text-align: center;
   color: #fbe6be;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  outline: none;
+  padding: 2px 4px;
+}
+
+.cover-title-input:focus,
+.cover-owner-input:focus {
+  border-bottom-color: #f3c872;
+  background: rgba(255, 240, 212, 0.08);
+  border-radius: 6px 6px 0 0;
+}
+
+.cover-title-input::placeholder,
+.cover-owner-input::placeholder {
+  color: rgba(251, 230, 190, 0.45);
 }
 
 .cover-years {

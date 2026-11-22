@@ -36,7 +36,8 @@ export function createDefaultMonth(monthKey: string): MonthData {
 export function createInitialState(): DiaryState {
   const defaultMonth = '2026-11';
   return {
-    ownerName: 'My Handbook Diary',
+    diaryTitle: 'Handbook Diary',
+    ownerName: '',
     isBookOpen: false,
     activeSection: 'month',
     activeMonthKey: defaultMonth,
@@ -251,6 +252,7 @@ export function loadDiaryState(): DiaryState {
     return {
       ...base,
       ...parsed,
+      diaryTitle: parsed.diaryTitle || base.diaryTitle,
       highlights: parsed.highlights || {},
       pageItems: parsed.pageItems || {},
       books: parsed.books || base.books,

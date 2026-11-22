@@ -79,6 +79,13 @@ export default function App() {
     saveDiaryState(state);
   }, [state]);
 
+  useEffect(() => {
+    const title = state.diaryTitle?.trim() || 'Handbook Diary';
+    document.title = state.ownerName?.trim()
+      ? `${title} — ${state.ownerName.trim()}`
+      : `${title} 2026–27`;
+  }, [state.diaryTitle, state.ownerName]);
+
   const monthInfo = useMemo(
     () => parseMonthKey(state.activeMonthKey),
     [state.activeMonthKey]
@@ -351,10 +358,14 @@ export default function App() {
 
       {!state.isBookOpen ? (
         <BookCover
+          diaryTitle={state.diaryTitle}
           ownerName={state.ownerName}
           season={monthInfo.season}
           activeMonthLabel={`${monthInfo.monthName} ${monthInfo.year}`}
           startDayLabel={startDayLabel}
+          onChangeDiaryTitle={(title) =>
+            setState((prev) => ({ ...prev, diaryTitle: title }))
+          }
           onChangeOwnerName={(name) =>
             setState((prev) => ({ ...prev, ownerName: name }))
           }
@@ -381,7 +392,7 @@ export default function App() {
                 }
                 title="Close Diary Cover"
               >
-                <BookOpen size={15} /> Cover
+                <BookOpen size={15} /> {state.diaryTitle?.trim() || 'Cover'}
               </button>
 
               <select

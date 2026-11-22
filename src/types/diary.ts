@@ -118,6 +118,7 @@ export interface BookEntry {
 export type ActiveSection = 'month' | 'bookshelf' | 'memories' | 'milestones';
 
 export interface DiaryState {
+  diaryTitle: string;
   ownerName: string;
   isBookOpen: boolean;
   activeSection: ActiveSection;
